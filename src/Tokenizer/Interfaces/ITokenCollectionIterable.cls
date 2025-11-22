@@ -1,22 +1,25 @@
 USING Tokenizer.Interfaces.IToken FROM PROPATH.
 /**
  * @author JonhCoderDev
- * @version 1.0.0
+ * @version 1.1.1
  * @license MIT
  * @repository https://github.com/JohnCoderDev/abl-tokenizer
  * @contributors
  * @location src/Tokenizer/Interfaces/ITokenCollectionIterable.cls
  * @description Interface defining the contract for iterable token collections.
  * @versionHistory
+ *      - 1.1.1: Fixed interface name typo.
  *      - 1.1.0: Added GetCurrentToken method.
  *      - 1.0.0: Initial definition of ITokenCollectionIterable interface.
  * @changeLog
+ *  - @version 1.1.1
+ *     - [2025-11-21] - Fixed interface name typo.
  *  - @version 1.1.0
  *     - [2025-11-21] - Added GetCurrentToken method.
  *  - @version 1.0.0
  *     - [2025-11-21] - Created ITokenCollectionIterable interface.
 */
-INTERFACE Tokenizer.Interfaces.ITokenCollectionIterable PUBLIC.
+INTERFACE Tokenizer.Interfaces.ITokenCollectionIterable:
     /**
     * @method GetFirstToken - Retrieves the first token in the collection.
     * @accessor PUBLIC
