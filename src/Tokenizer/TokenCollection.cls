@@ -4,19 +4,23 @@ USING Tokenizer.Interfaces.* FROM PROPATH.
 /**
  * @license MIT
  * @author JohnCoderDev
- * @version 1.0.0
+ * @version 1.1.0
  * @repository https://github.com/JohnCoderDev/abl-tokenizer
  * @contributors
  * @implements {Tokenizer.Interfaces.ITokenCollection} (src/Tokenizer/Interfaces/ITokenCollection.cls)
+ * @implements {Tokenizer.Interfaces.ITokenCollectionIterable} (src/Tokenizer/Interfaces/ITokenCollectionIterable.cls)
  * @location src/Tokenizer/TokenCollection.cls
  * @description Implementation of ITokenCollection that manages a collection of tokens.
  * @versionHistory
+ *      - 1.1.0: Added implementation of ITokenCollectionIterable interface.
  *      - 1.0.0: Initial implementation.
  * @changeLog
+ *   - @version 1.1.0
+ *      - [2025-11-21] - Implemented ITokenCollectionIterable interface methods.
  *   - @version 1.0.0
  *      - [2025-11-18] - Initial creation of TokenCollection class implementing ITokenCollection.
 */
-CLASS Tokenizer.TokenCollection IMPLEMENTS ITokenCollection:
+CLASS Tokenizer.TokenCollection IMPLEMENTS ITokenCollection, ITokenCollectionIterable:
     /**
     * @tempTable ttTokens - Temporary table to store tokens.
     * @description Temporary table to hold tokens in the collection.
@@ -45,6 +49,103 @@ CLASS Tokenizer.TokenCollection IMPLEMENTS ITokenCollection:
     *       - [2025-11-18] - Added TokenCount property.
     */
     DEFINE PRIVATE PROPERTY TokenCount AS INT64 NO-UNDO GET. SET.
+
+    /**
+    * @method GetFirstToken - Retrieves the first token in the collection.
+    * @accessor PUBLIC
+    * @description Returns the first token from the token collection.
+    * @returns {Tokenizer.Interfaces.IToken} - The first token in the collection.
+    * @changeLog
+    *   - @version 1.1.0 
+    *      - [2025-11-21] - Implemented GetFirstToken method.
+    */
+    METHOD PUBLIC IToken GetFirstToken():
+        DEFINE VARIABLE resultToken AS IToken NO-UNDO.
+        FIND FIRST ttTokens NO-ERROR.
+        IF AVAILABLE ttTokens THEN
+            resultToken = CAST(ttTokens.tokenObject, IToken).
+        RETURN resultToken.
+    END METHOD.
+
+    /**
+    * @method GetNextToken - Retrieves the next token in the collection.
+    * @accessor PUBLIC
+    * @description Returns the next token from the token collection.
+    * @returns {Tokenizer.Interfaces.IToken} - The next token in the collection.
+    * @changeLog
+    *   - @version 1.1.0
+    *       - [2025-11-21] - Implemented GetNextToken method.
+    */
+    METHOD PUBLIC IToken GetNextToken():
+        DEFINE VARIABLE resultToken AS IToken NO-UNDO.
+        FIND NEXT ttTokens NO-ERROR.
+        IF AVAILABLE ttTokens THEN
+            resultToken = CAST(ttTokens.tokenObject, IToken).
+        RETURN resultToken.
+    END METHOD.
+
+    /**
+    * @method GetPreviousToken - Retrieves the previous token in the collection.
+    * @accessor PUBLIC
+    * @description Returns the previous token from the token collection.
+    * @returns {Tokenizer.Interfaces.IToken} - The previous token in the collection.
+    * @changeLog
+    *   - @version 1.1.0
+    *      - [2025-11-21] - Implemented GetPreviousToken method.
+    */
+    METHOD PUBLIC IToken GetPreviousToken():
+        DEFINE VARIABLE resultToken AS IToken NO-UNDO.
+        FIND PREV ttTokens NO-ERROR.
+        IF AVAILABLE ttTokens THEN
+            resultToken = CAST(ttTokens.tokenObject, IToken).
+        RETURN resultToken.
+    END METHOD.
+
+    /**
+    * @method GetLastToken - Retrieves the last token in the collection.
+    * @accessor PUBLIC
+    * @description Returns the last token from the token collection.
+    * @returns {Tokenizer.Interfaces.IToken} - The last token in the collection.
+    * @changeLog
+    *   - @version 1.1.0
+    *      - [2025-11-21] - Implemented GetLastToken method.
+    */
+    METHOD PUBLIC IToken GetLastToken():
+        DEFINE VARIABLE resultToken AS IToken NO-UNDO.
+        FIND LAST ttTokens NO-ERROR.
+        IF AVAILABLE ttTokens THEN
+            resultToken = CAST(ttTokens.tokenObject, IToken).
+        RETURN resultToken.
+    END METHOD.
+
+    /**
+    * @method GetCurrentToken - Retrieves the current token in the iteration.
+    * @accessor PUBLIC
+    * @description Returns the current token in the iteration.
+    * @returns {Tokenizer.Interfaces.IToken} - The current token in the iteration.
+    * @changeLog
+    *  - @version 1.1.0
+    *    - [2025-11-21] - Implemented GetCurrentToken method.
+    */
+    METHOD PUBLIC IToken GetCurrentToken():
+        DEFINE VARIABLE resultToken AS IToken NO-UNDO.
+        IF AVAILABLE ttTokens THEN
+            resultToken = CAST(ttTokens.tokenObject, IToken).
+        RETURN resultToken.
+    END METHOD.
+
+    /**
+    * @method HasMoreTokens - Checks if there are more tokens in the collection.
+    * @accessor PUBLIC
+    * @description Returns TRUE if there are more tokens to iterate over, FALSE otherwise.
+    * @returns {LOGICAL} - TRUE if more tokens are available, FALSE otherwise.
+    * @changeLog
+    *  - @version 1.1.0
+    *       - [2025-11-21] - Implemented HasMoreTokens method.
+    */
+    METHOD PUBLIC LOGICAL HasMoreTokens():
+        RETURN AVAILABLE ttTokens.
+    END METHOD.
 
     /** 
     * @method AddToken - Adds a token to the collection.
