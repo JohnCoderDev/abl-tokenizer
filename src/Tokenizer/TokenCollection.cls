@@ -19,6 +19,27 @@ USING Tokenizer.Interfaces.* FROM PROPATH.
  *      - [2025-11-21] - Implemented ITokenCollectionIterable interface methods.
  *   - @version 1.0.0
  *      - [2025-11-18] - Initial creation of TokenCollection class implementing ITokenCollection.
+ * @codeExample
+ ```abl
+ USING Tokenizer.* FROM PROPATH. 
+ USING Tokenizer.Interfaces.* FROM PROPATH. 
+ // ... complementary code ...
+
+ DEFINE VARIABLE tokens AS TokenCollection NO-UNDO.
+ // ... populate tokens logic ...
+
+ tokens:GetFirstToken().
+
+ DO WHILE tokens:HasMoreTokens():
+     DEFINE VARIABLE currentToken AS IToken NO-UNDO.
+     ASSIGN
+        currentToken = tokens:GetCurrentToken().
+
+     // ... process currentToken as needed ...
+
+     tokens:GetNextToken().
+ END.
+ ```
 */
 CLASS Tokenizer.TokenCollection IMPLEMENTS ITokenCollection, ITokenCollectionIterable:
     /**
