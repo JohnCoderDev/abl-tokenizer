@@ -8,8 +8,11 @@ USING Tokenizer.Interfaces.IToken FROM PROPATH.
  * @location src/Tokenizer/Interfaces/ITokenCollectionIterable.cls
  * @description Interface defining the contract for iterable token collections.
  * @versionHistory
+ *      - 1.1.0: Added GetCurrentToken method.
  *      - 1.0.0: Initial definition of ITokenCollectionIterable interface.
  * @changeLog
+ *  - @version 1.1.0
+ *     - [2025-11-21] - Added GetCurrentToken method.
  *  - @version 1.0.0
  *     - [2025-11-21] - Created ITokenCollectionIterable interface.
 */
@@ -57,6 +60,17 @@ INTERFACE Tokenizer.Interfaces.ITokenCollectionIterable PUBLIC.
      *    - [2025-11-21] - Added GetLastToken method.
     */
     METHOD PUBLIC IToken GetLastToken().
+
+    /**
+    * @method GetCurrentToken - Retrieves the current token in the iteration.
+    * @accessor PUBLIC
+    * @description Returns the current token in the iteration.
+    * @returns {Tokenizer.Interfaces.IToken} - The current token in the iteration.
+    * @changeLog
+    *  - @version 1.1.0
+    *    - [2025-11-21] - Added GetCurrentToken method.
+    */
+    METHOD PUBLIC IToken GetCurrentToken().
 
     /**
      * @method HasMoreTokens - Checks if there are more tokens in the collection.
