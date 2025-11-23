@@ -274,5 +274,9 @@ CLASS Tokenizer.TokenRules IMPLEMENTS ITokenRules:
         FOR EACH ttRowSeparators:
             DELETE ttRowSeparators.
         END.
+
+        FOR EACH ttWhitespacePatterns:
+            DELETE ttWhitespacePatterns.
+        END.
     END DESTRUCTOR.
 END CLASS.
