@@ -1,6 +1,6 @@
 USING Tokenizer.Interfaces.IToken FROM PROPATH.
 /**
- * @author JonhCoderDev
+ * @author JohnCoderDev
  * @version 1.1.1
  * @license MIT
  * @repository https://github.com/JohnCoderDev/abl-tokenizer
