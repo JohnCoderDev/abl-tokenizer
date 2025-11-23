@@ -166,8 +166,7 @@ CLASS Tokenizer.TokenRules IMPLEMENTS ITokenRules:
     *       - [2025-11-18] - Implemented AddRowSeparator method.
     */
     METHOD PUBLIC VOID AddRowSeparator(pRowSeparator AS CHARACTER):
-        FIND FIRST ttRowSeparators WHERE ttRowSeparators.separator = pRowSeparator NO-LOCK NO-ERROR.
-        IF NOT AVAILABLE ttRowSeparators THEN DO:
+        IF NOT CAN-FIND(FIRST ttRowSeparators WHERE ttRowSeparators.separator = pRowSeparator) THEN DO:
             CREATE ttRowSeparators.
             ASSIGN 
                 ttRowSeparators.separator = pRowSeparator.
