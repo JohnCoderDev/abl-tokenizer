@@ -5,7 +5,7 @@ USING Tokenizer.Interfaces.IToken FROM PROPATH.
  * @version 1.0.0
  * @repository https://github.com/JohnCoderDev/abl-tokenizer
  * @contributors
- * @implements {Tokenizer.Interfaces.ITokenCollection} (src/Tokenizer/Interfaces/ITokenCollection.cls)
+ * @interface
  * @location src/Tokenizer/TokenCollection.cls
  * @description Interface defining the contract for a collection of tokens.
  * @versionHistory
