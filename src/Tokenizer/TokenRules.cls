@@ -151,7 +151,7 @@ CLASS Tokenizer.TokenRules IMPLEMENTS ITokenRules:
     *       - [2025-11-18] - Implemented RemoveTokenType method.
     */
     METHOD PUBLIC VOID RemoveTokenType(pTokenType AS CHARACTER):
-        FIND FIRST ttTokenTypes WHERE ttTokenTypes.TokenType = pTokenType NO-LOCK NO-ERROR.
+        FIND FIRST ttTokenTypes WHERE ttTokenTypes.TokenType = pTokenType EXCLUSIVE-LOCK NO-ERROR.
         IF AVAILABLE ttTokenTypes THEN
             DELETE ttTokenTypes.
     END METHOD.
