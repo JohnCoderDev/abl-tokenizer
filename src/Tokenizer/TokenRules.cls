@@ -166,7 +166,7 @@ CLASS Tokenizer.TokenRules IMPLEMENTS ITokenRules:
     *       - [2025-11-18] - Implemented AddRowSeparator method.
     */
     METHOD PUBLIC VOID AddRowSeparator(pRowSeparator AS CHARACTER):
-        IF NOT CAN-FIND(FIRST ttRowSeparators WHERE ttRowSeparators.separator = pRowSeparator) THEN DO:
+        IF NOT CAN-FIND(FIRST ttRowSeparators WHERE ttRowSeparators.separator = pRowSeparator NO-LOCK) THEN DO:
             CREATE ttRowSeparators.
             ASSIGN 
                 ttRowSeparators.separator = pRowSeparator.
@@ -197,8 +197,7 @@ CLASS Tokenizer.TokenRules IMPLEMENTS ITokenRules:
     *    - [2025-11-21] - Implemented AddWhitespacePattern method. 
     */
     METHOD PUBLIC VOID AddWhitespacePattern(pWhitespacePattern AS CHARACTER):
-        FIND FIRST ttWhitespacePatterns WHERE ttWhitespacePatterns.pattern = pWhitespacePattern NO-LOCK NO-ERROR.
-        IF NOT AVAILABLE ttWhitespacePatterns THEN DO:
+        IF NOT CAN-FIND(FIRST ttWhitespacePatterns WHERE ttWhitespacePatterns.pattern = pWhitespacePattern NO-LOCK) THEN DO:
             CREATE ttWhitespacePatterns.
             ASSIGN 
                 ttWhitespacePatterns.pattern = pWhitespacePattern.
